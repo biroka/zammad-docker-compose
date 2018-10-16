@@ -11,7 +11,7 @@ workディレクトリ以下に、stable版のzammadを配置して下さい。
 $ cd work
 $ git clone git@github.com:asial/zammad.git
 $ cd zammad
-$ git checkout -b stable origin/stable
+$ git checkout -b stable origin/stable-asial
 ```
 
 
