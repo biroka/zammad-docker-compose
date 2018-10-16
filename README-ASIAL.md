@@ -39,5 +39,17 @@ $ docker-compose down
 $ docker-compose restart
 ```
 
+## そのほかの注意事項
+
+Dockerが利用出来るメモリも4G以上として下さい。
+
+`vm.max_map_count=262144`としてください。
+
+```
+sysctl -w vm.max_map_count=262144
+```
+
+参考ページ：
+https://docs.zammad.org/en/latest/install-docker-compose.html
 
 
