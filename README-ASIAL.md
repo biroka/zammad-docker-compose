@@ -1,5 +1,18 @@
 # zammad-docker-composeの改良版
 
+## はじめに
+
+zammad-docker-composeをAsialでの利用するために改修したバージョンです。
+オリジナルは
+https://github.com/zammad/zammad-docker-compose
+
+主な違いは
+
+1. railsをイメージ内のものではなく、ホストOS上にマウントしたものを利用する
+2. 初期化時に必要な`bundle install`や、`assets:precompile`を実行する
+3. ISO-2022-JPのメールに対応した
+
+です。
 
 ## 設定
 
