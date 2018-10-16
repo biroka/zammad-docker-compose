@@ -13,7 +13,7 @@ services:
     restart: ${RESTART}
     volumes:
       - zammad-backup:/var/tmp/zammad
-      - zammad-data:/opt/zammad
+      - ./work/zammad:/opt/zammad
 
   zammad-elasticsearch:
     image: ${IMAGE_REPO}:zammad-elasticsearch${VERSION}
@@ -22,6 +22,7 @@ services:
       - elasticsearch-data:/usr/share/elasticsearch/data
 
   zammad-init:
+    entrypoint: ["/opt/init-scripts/docker-entrypoint-asial.sh"]
     command: ["zammad-init"]
     depends_on:
       - zammad-postgresql
@@ -31,7 +32,8 @@ services:
       - zammad-postgresql
     restart: on-failure
     volumes:
-      - zammad-data:/opt/zammad
+      - ./work/zammad:/opt/zammad
+      - ./init-scripts:/opt/init-scripts
 
   zammad-memcached:
     command: ["zammad-memcached"]
@@ -48,7 +50,7 @@ services:
       - zammad-websocket
     restart: ${RESTART}
     volumes:
-      - zammad-data:/opt/zammad
+      - ./work/zammad:/opt/zammad
     expose:
       - "80"
 
@@ -59,6 +61,7 @@ services:
       - postgresql-data:/var/lib/postgresql/data
 
   zammad-railsserver:
+    entrypoint: ["/opt/init-scripts/docker-entrypoint-asial.sh"]
     command: ["zammad-railsserver"]
     depends_on:
       - zammad-memcached
@@ -70,9 +73,11 @@ services:
       - zammad-postgresql
     restart: ${RESTART}
     volumes:
-      - zammad-data:/opt/zammad
+      - ./work/zammad:/opt/zammad
+      - ./init-scripts:/opt/init-scripts
 
   zammad-scheduler:
+    entrypoint: ["/opt/init-scripts/docker-entrypoint-asial.sh"]
     command: ["zammad-scheduler"]
     depends_on:
       - zammad-memcached
@@ -84,9 +89,11 @@ services:
       - zammad-postgresql
     restart: ${RESTART}
     volumes:
-      - zammad-data:/opt/zammad
+      - ./work/zammad:/opt/zammad
+      - ./init-scripts:/opt/init-scripts
 
   zammad-websocket:
+    entrypoint: ["/opt/init-scripts/docker-entrypoint-asial.sh"]
     command: ["zammad-websocket"]
     depends_on:
       - zammad-memcached
@@ -97,7 +104,8 @@ services:
       - zammad-memcached
     restart: ${RESTART}
     volumes:
-      - zammad-data:/opt/zammad
+      - ./work/zammad:/opt/zammad
+      - ./init-scripts:/opt/init-scripts
 
 volumes:
   elasticsearch-data:
@@ -106,5 +114,4 @@ volumes:
     driver: local
   zammad-backup:
     driver: local
-  zammad-data:
-    driver: local
+
