@@ -1,3 +1,4 @@
 docker-compose-test.yml
+docker-compose.yml
 work/*
 !.gitkeep

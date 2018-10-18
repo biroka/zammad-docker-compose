@@ -1,42 +1,102 @@
-# Welcome to Zammad
+# zammad-docker-composeの改良版
 
-Zammad is a web based open source helpdesk/ticket system with many features
-to manage customer communication via several channels like telephone, facebook,
-twitter, chat and e-mails. It is distributed under the GNU AFFERO General Public
- License (AGPL). Do you receive many e-mails and want to answer them with a team of agents?
-You're going to love Zammad!
+## はじめに
 
+zammad-docker-composeをAsialでの利用するために改修したバージョンです。
+オリジナルは
+https://github.com/zammad/zammad-docker-compose
 
-## What is zammad-docker-compose repo for?
+主な違いは
 
-This repo is meant to be the starting point for somebody who likes to use dockerized multi-container Zammad in production.
+1. railsをイメージ内のものではなく、ホストOS上にマウントしたものを利用する
+2. 初期化時に必要な`bundle install`や、`assets:precompile`を実行する
+3. ISO-2022-JPのメールに対応した
 
+です。
 
-## Getting started with zammad-docker-compose
+オリジナルのREADME.mdはREADME-ORIGINAL.mdとしています。
 
+## 設定
+
+### docker-compose.ymlの設定
+
+`docker-compose.yml.asial`をコピーして、`docker-compose.yml`としてください。
+
+ローカルで利用する場合は、ホストOSの8000ポートからゲストOSの80ポートにフォワーティングするために、
+docker-compose.ymlのzammad-nginxのexposeのあとに
+
+```
+    ports:
+      - "8000:80"
+```
+
+を追加して下さい。(expose自体は残しておく)
+
+### zammadの設定
+
+workディレクトリ以下に、stable-asial版のzammadを配置して下さい。
+
+例：
+
+```
+$ cd work
+$ git clone git@github.com:asial/zammad.git
+$ cd zammad
+$ git checkout -b stable-asial origin/stable-asial
+```
+
+## 起動・終了・リスタート
+
+```
+$ docker-compose up -d
+```
+
+```
+$ docker-compose down
+```
+
+```
+$ docker-compose restart
+```
+
+## そのほかの注意事項
+
+Dockerが利用出来るメモリも4G以上として下さい。
+
+`vm.max_map_count=262144`としてください。
+
+```
+sysctl -w vm.max_map_count=262144
+```
+
+参考ページ：
 https://docs.zammad.org/en/latest/install-docker-compose.html
 
 
-## Build Status
+## 改修のポイント
 
-[![Build Status](https://travis-ci.org/zammad/zammad-docker-compose.svg?branch=master)](https://travis-ci.org/zammad/zammad-docker-compose)
+現在、起動処理が結構重いです。その理由は、起動スクリプト内で、
+
+GEMのインストール
+```
+  bundle install
+```
+
+アセットのビルド
+```
+  bundle exec rake assets:precompile
+```
+
+などが行われているため。（特に、Nokogiri-1.8.5が重い）
+
+起動スクリプトは
+```
+init-scripts/docker-entrypoint-asial.sh
+```
+が利用されている。(zammad-init, zammad-railsserver, zammad-scheduler, zammad-websocketの4サーバーのみ)
+必要に応じて、この起動スクリプトを変更すればOK
+
+将来的には、Nokogiri-1.8.5が組み込み済みのイメージを使った方が良いと思われる。そうすれば、`bundle install`の処理を
+起動スクリプトから外すことが出来る。
 
 
-## Using a reverse proxy
-
-In environments with more then one web applications it is necessary to use a reverse proxy to route connections to port 80 and 443 to the right application.
-To run Zammad behind a revers proxy, we provide `docker-compose.proxy-example.yml` as a starting point.
-
-1.  Copy `./.examples/proxy/docker-compose.proxy-example.yml` to your own configuration, e.g. `./docker-compose.prod.yml`  
-    `cp ./.examples/proxy/docker-compose.proxy-example.yml ./docker-compose.prod.yml`
-1.  Modify the environment variable `VIRTUAL_HOST` and the name of the external network in `./docker-compose.prod.yml` to fit your environment.
-1.  Run docker-composer commands with the default and your configuration, e.g. `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`  
-
-See `.examples/proxy/docker-compose.yml` for an example proxy project.
-
-Like this, you can add your `docker-compose.prod.yml` to a branch of your Git repository and stay up to date by merging changes to your branch.
-
-
-## Using Rancher
-
-* RANCHER_URL=http://RANCHER_HOST:8080 rancher-compose --env-file=.env up
