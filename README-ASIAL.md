@@ -16,17 +16,9 @@ https://github.com/zammad/zammad-docker-compose
 
 ## 設定
 
-workディレクトリ以下に、stable-asial版のzammadを配置して下さい。
+### docker-compose.ymlの設定
 
-例：
-
-```
-$ cd work
-$ git clone git@github.com:asial/zammad.git
-$ cd zammad
-$ git checkout -b stable-asial origin/stable-asial
-```
-
+`docker-compose.yml.asial`をコピーして、`docker-compose.yml`としてください。
 
 ローカルで利用する場合は、ホストOSの8000ポートからゲストOSの80ポートにフォワーティングするために、
 docker-compose.ymlのzammad-nginxのexposeのあとに
@@ -37,6 +29,19 @@ docker-compose.ymlのzammad-nginxのexposeのあとに
 ```
 
 を追加して下さい。(expose自体は残しておく)
+
+### zammadの設定
+
+workディレクトリ以下に、stable-asial版のzammadを配置して下さい。
+
+例：
+
+```
+$ cd work
+$ git clone git@github.com:asial/zammad.git
+$ cd zammad
+$ git checkout -b stable-asial origin/stable-asial
+```
 
 ## 起動・終了・リスタート
 

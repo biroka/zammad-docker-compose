@@ -33,6 +33,13 @@ if [ "$1" = 'zammad-init' ]; then
   # rsync -a --delete --exclude 'public/assets/images/*' --exclude 'storage/fs/*' ${ZAMMAD_TMP_DIR}/ ${ZAMMAD_DIR}
   # rsync -a ${ZAMMAD_TMP_DIR}/public/assets/images/ ${ZAMMAD_DIR}/public/assets/images
 
+  if [ -f ${ZAMMAD_DIR}/tmp/pids/server.pid ]; then
+    echo "Found server.pid"
+    echo "...removing server.pid"
+    rm ${ZAMMAD_DIR}/tmp/pids/server.pid 
+  fi
+
+
   until (echo > /dev/tcp/${POSTGRESQL_HOST}/${POSTGRESQL_PORT}) &> /dev/null; do
     echo "zammad railsserver waiting for postgresql server to be ready..."
     sleep 5
@@ -49,7 +56,7 @@ if [ "$1" = 'zammad-init' ]; then
   echo "initialising / updating database..."
   # db mirgrate
 
-  bundle install
+  bundle install --path vendor/bundle
 
   set +e
   bundle exec rake db:migrate &> /dev/null
@@ -114,7 +121,7 @@ if [ "$1" = 'zammad-railsserver' ]; then
 
   cd ${ZAMMAD_DIR}
 
-  bundle install
+  bundle install --path vendor/bundle
 
   echo "starting railsserver..."
 
@@ -128,7 +135,7 @@ if [ "$1" = 'zammad-scheduler' ]; then
 
   cd ${ZAMMAD_DIR}
 
-  bundle install
+  bundle install --path vendor/bundle
 
 
   echo "starting scheduler..."
@@ -143,7 +150,7 @@ if [ "$1" = 'zammad-websocket' ]; then
 
   cd ${ZAMMAD_DIR}
 
-  bundle install
+  bundle install --path vendor/bundle
 
   echo "starting websocket server..."
 
