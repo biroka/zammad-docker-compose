@@ -56,7 +56,7 @@ if [ "$1" = 'zammad-init' ]; then
   echo "initialising / updating database..."
   # db mirgrate
 
-  bundle install --path vendor/bundle
+  bundle install
 
   set +e
   bundle exec rake db:migrate &> /dev/null
@@ -71,6 +71,7 @@ if [ "$1" = 'zammad-init' ]; then
     bundle exec rake db:seed
   fi
 
+  echo "assets precompiling..."
   bundle exec rake assets:precompile
 
   echo "changing settings..."
@@ -121,7 +122,7 @@ if [ "$1" = 'zammad-railsserver' ]; then
 
   cd ${ZAMMAD_DIR}
 
-  bundle install --path vendor/bundle
+  bundle install
 
   echo "starting railsserver..."
 
@@ -135,7 +136,7 @@ if [ "$1" = 'zammad-scheduler' ]; then
 
   cd ${ZAMMAD_DIR}
 
-  bundle install --path vendor/bundle
+  bundle install
 
 
   echo "starting scheduler..."
@@ -150,7 +151,7 @@ if [ "$1" = 'zammad-websocket' ]; then
 
   cd ${ZAMMAD_DIR}
 
-  bundle install --path vendor/bundle
+  bundle install
 
   echo "starting websocket server..."
 
