@@ -54,7 +54,7 @@ services:
     expose:
       - "80"
     ports:
-      - "8080:80"      
+      - "8000:80"
 
   zammad-postgresql:
     image: ${IMAGE_REPO}:zammad-postgresql${VERSION}
