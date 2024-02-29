@@ -3,13 +3,13 @@
 ## Tech Stack
 biroka/zammad-docker-compose is built on the following main stack:
 
-- [Elasticsearch](https://www.elastic.co/products/elasticsearch) – Search as a Service
 - [Ruby](https://www.ruby-lang.org) – Languages
-- [Memcached](http://memcached.org/) – Databases
 - [Heroku Postgres](https://www.heroku.com/postgres) – PostgreSQL as a Service
-- [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- [Memcached](http://memcached.org/) – Databases
 - [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 - [Travis CI](http://travis-ci.com/) – Continuous Integration
+- [Elasticsearch](https://www.elastic.co/products/elasticsearch) – Search as a Service
+- [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
 
 Full tech stack [here](/techstack.md)
 
@@ -19,13 +19,13 @@ Full tech stack [here](/techstack.md)
 ## Tech Stack
 biroka/zammad-docker-compose is built on the following main stack:
 
-- <img width='25' height='25' src='https://img.stackshare.io/service/841/Image_2019-05-20_at_4.58.04_PM.png' alt='Elasticsearch'/> [Elasticsearch](https://www.elastic.co/products/elasticsearch) – Search as a Service
 - <img width='25' height='25' src='https://img.stackshare.io/service/989/ruby.png' alt='Ruby'/> [Ruby](https://www.ruby-lang.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1040/hDNnpa4a_400x400.jpg' alt='Memcached'/> [Memcached](http://memcached.org/) – Databases
 - <img width='25' height='25' src='https://img.stackshare.io/service/2516/original.png' alt='Heroku Postgres'/> [Heroku Postgres](https://www.heroku.com/postgres) – PostgreSQL as a Service
-- <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- <img width='25' height='25' src='https://img.stackshare.io/service/1040/hDNnpa4a_400x400.jpg' alt='Memcached'/> [Memcached](http://memcached.org/) – Databases
 - <img width='25' height='25' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'/> [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 - <img width='25' height='25' src='https://img.stackshare.io/service/460/Lu6cGu0z_400x400.png' alt='Travis CI'/> [Travis CI](http://travis-ci.com/) – Continuous Integration
+- <img width='25' height='25' src='https://img.stackshare.io/service/841/Image_2019-05-20_at_4.58.04_PM.png' alt='Elasticsearch'/> [Elasticsearch](https://www.elastic.co/products/elasticsearch) – Search as a Service
+- <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
 
 Full tech stack [here](/techstack.md)
 
@@ -36,7 +36,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [biroka/zammad-docker-compose](https://github.com/biroka/zammad-docker-compose)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|8<br/>Tools used|01/05/24 <br/>Report generated|
+|8<br/>Tools used|02/29/24 <br/>Report generated|
 |------|------|
 </div>
 
